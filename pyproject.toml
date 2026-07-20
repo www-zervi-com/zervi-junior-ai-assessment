@@ -3,10 +3,18 @@ name = "ai-assistant"
 version = "0.1.0"
 description = "Junior assessment repo for the Zervi IT-AI team"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "fastapi>=0.100",
+    "uvicorn>=0.23",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.6",
+]
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0"]
+dev = [
+    "pytest>=7.0",
+    "httpx>=0.24",
+]
 
 [project.scripts]
 ai-assistant = "ai_assistant.cli:main"
