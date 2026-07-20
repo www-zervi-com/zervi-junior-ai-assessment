@@ -1,18 +1,51 @@
 # Zervi Junior AI Assessment
 
-A small, self-contained AI-assistant CLI used for the Zervi IT-AI team's junior software engineer on-the-job assessment.
+A small, self-contained AI-assistant project used for the Zervi IT-AI team's junior software engineer on-the-job assessment.
 
 ## What this project is
 
-This is a minimal "AI assistant" toolkit with:
+This is a minimal AI assistant toolkit with:
 
 - A command-line interface (`ai-assistant`)
 - A simple skill/plugin system
 - A stubbed LLM client
-- A short-term conversation memory module
+- Conversation memory
+- A FastAPI web service with SQLite persistence
+- API key authentication
 - A small pytest suite
 
-It is intentionally simpler than production Zervi systems, but it uses similar patterns: CLI tools, modular skills, LLM integrations, and tests.
+It is intentionally simpler than production Zervi systems, but it uses similar patterns: CLI tools, modular skills, LLM integrations, web APIs, databases, and tests.
+
+---
+
+## Assessment Roadmap
+
+Complete the tasks in order. Push your progress to your fork after each phase.
+
+### Phase 1 — CLI & Skills
+
+1. [ ] **Setup** — Get the project running and run `pytest`.
+2. [ ] **Fix skill lookup** — Make skill names case-insensitive.
+3. [ ] **Fix LLM message order** — System messages must come first.
+4. [ ] **Fix memory limit** — `get_recent` must not exceed `max_messages`.
+5. [ ] **Add weather skill** — Build and test a new skill.
+6. [ ] **(Bonus) Add chat command** — Multi-turn conversation via CLI.
+
+### Phase 2 — Web API
+
+7. [ ] **Fix database ordering** — Messages returned oldest → newest.
+8. [ ] **Implement API key auth** — Validate `Authorization: Bearer <key>`.
+9. [ ] **Wire `/chat` endpoint** — Load history, generate reply, persist both sides.
+10. [ ] **Wire frontend** — Connect the HTML form to `/chat` and `/history`.
+11. [ ] **(Stretch)** Add `DELETE /history`, pagination, or Docker.
+
+Detailed instructions for each phase are in:
+
+- [`docs/TASKS.md`](docs/TASKS.md)
+- [`docs/TASKS-chat-bonus.md`](docs/TASKS-chat-bonus.md)
+- [`docs/TASKS-web-phase.md`](docs/TASKS-web-phase.md)
+
+---
 
 ## Setup
 
@@ -36,7 +69,7 @@ It is intentionally simpler than production Zervi systems, but it uses similar p
    pytest
    ```
 
-   Some tests will fail on the first run — that is expected. See `docs/TASKS.md`.
+   Some tests will fail on the first run — that is expected. The tasks above tell you how to fix them.
 
 ## Quick usage
 
@@ -46,14 +79,13 @@ ai-assistant list
 
 # Run a skill
 ai-assistant run --skill echo --input "hello world"
+
+# Run the web app
+uvicorn ai_assistant.web:app --reload
 ```
-
-## Assessment tasks
-
-See [`docs/TASKS.md`](docs/TASKS.md) for the Day 1 and Day 2 exercises.
 
 ## Notes for assessors
 
 - The candidate should read `AGENTS.md` before writing code.
-- The repo contains a few deliberate, junior-level bugs.
-- Day 2 asks the candidate to extend the skill system with a new feature.
+- The repo contains deliberate bugs and incomplete features.
+- Assessment criteria: problem solving, code quality, testing, git hygiene, and communication.
