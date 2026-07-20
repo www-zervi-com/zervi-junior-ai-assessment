@@ -1,0 +1,19 @@
+[project]
+name = "ai-assistant"
+version = "0.1.0"
+description = "Junior assessment repo for the Zervi IT-AI team"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+ai-assistant = "ai_assistant.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
